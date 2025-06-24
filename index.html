@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Media Watcher</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: #222; 
+            color: #fff; 
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        h1 { 
+            margin: 0; 
+            padding: 1em; 
+            background: #333; 
+            text-align: center;
+        }
+        .status-bar {
+            background: #1a1a1a;
+            border-bottom: 1px solid #444;
+            padding: 10px 15px;
+            font-size: 0.9em;
+        }
+        .status-item {
+            margin: 2px 0;
+            color: #4CAF50;
+        }
+        .status-item.info {
+            color: #2196F3;
+        }
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .progress-operation {
+            font-weight: bold;
+            color: #fff;
+        }
+        .progress-details {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+            color: #aaa;
+        }
+        .elapsed-time {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            transition: width 0.3s ease;
+        }
+        .current-file {
+            font-size: 0.8em;
+            color: #2196F3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 400px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 10px;
+            padding: 10px;
+        }
+        .drop-area {
+            width: 100%;
+            height: 100px;
+            border: 3px dashed #555;
+            border-radius: 10px;
+            background: #2a2a2a;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .drop-area.dragover {
+            border-color: #4CAF50;
+            background: #1a3d1a;
+        }
+        .drop-area h2 {
+            margin: 0 20px 0 0;
+            color: #888;
+            font-size: 1.1em;
+            text-align: center;
+        }
+        .drop-area p {
+            margin: 0 10px;
+            color: #666;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .drop-icon {
+            font-size: 2.5em;
+            color: #555;
+            margin-right: 20px;
+        }
+        .drop-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .history-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+        .history-button:hover {
+            background: #45a049;
+        }
+        #log { 
+            flex: 1;
+            overflow-y: auto; 
+            background: #111; 
+            padding: 1em;
+            border-radius: 10px;
+            border: 1px solid #444;
+            width: 100%;
+        }
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .log-success {
+            background: #1a4d1a;
+            border-left: 3px solid #4CAF50;
+        }
+        .log-error {
+            background: #4d1a1a;
+            border-left: 3px solid #f44336;
+        }
+        .log-warning {
+            background: #4d3d1a;
+            border-left: 3px solid #ff9800;
+        }
+        .log-info {
+            background: #1a3d4d;
+            border-left: 3px solid #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎬 Media Watcher</h1>
+    <button class="history-button" id="historyBtn">📋 History</button>
+    <div class="status-bar" id="statusBar">
+        <div class="status-item">✅ Ready - Drop files or folders to process</div>
+    </div>
+    <div class="container">
+        <div class="drop-area" id="dropArea">
+            <div class="drop-icon">📁</div>
+            <div class="drop-content">
+                <h2>Drop Media Files or Folders Here</h2>
+                <div style="display: flex; gap: 20px;">
+                    <p>Or click to select files/folders</p>
+                    <p>Supports: Videos, Images, Audio</p>
+                    <p>Recursively searches through folders</p>
+                </div>
+            </div>
+        </div>
+        <div id="log">
+            <!-- Recent activity will appear here -->
+        </div>
+    </div>
+    <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Build outputs
+dist/
+build/
+
+# Electron build outputs
+out/
+app-builds/
+
+# App-specific folders (contains user media)
+watched-folder/
+sorted-media/
+test-files/
+
+# App data files (contains user's processed file history)
+media-history.json
+launch.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+
+# App-specific executables
+MediaWatcher.app/
+
+# Log files
+*.log

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Media History</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: #222; 
+            color: #fff; 
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #444;
+        }
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #333;
+            border-radius: 8px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            color: #888;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #444;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab.active {
+            border-bottom-color: #4CAF50;
+            color: #4CAF50;
+        }
+        .tab:hover {
+            background: #333;
+        }
+        .content {
+            max-height: 400px;
+            overflow-y: auto;
+            background: #111;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin-bottom: 5px;
+            background: #2a2a2a;
+            border-radius: 5px;
+            border-left: 3px solid #4CAF50;
+        }
+        .file-item.removed {
+            border-left-color: #f44336;
+            opacity: 0.7;
+        }
+        .file-info {
+            flex: 1;
+        }
+        .file-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .file-details {
+            font-size: 0.85em;
+            color: #888;
+            line-height: 1.4;
+        }
+        .detail-item {
+            display: inline-block;
+            margin-right: 15px;
+            white-space: nowrap;
+        }
+        .original-path {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85em;
+            color: #666;
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            cursor: help;
+        }
+        .original-path:hover {
+            background: #e8e8e8;
+            color: #333;
+        }
+        .file-item.removed .original-path {
+            background: #ffe6e6;
+            color: #8b4513;
+        }
+        .date-group {
+            margin-bottom: 25px;
+        }
+        .date-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: #333;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #4CAF50;
+            font-weight: bold;
+        }
+        .date-header.removed-header {
+            border-left-color: #f44336;
+            background: #2a1f1f;
+        }
+        .date-icon {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+        .date-label {
+            flex: 1;
+            font-size: 1.1em;
+        }
+        .file-count {
+            font-size: 0.9em;
+            color: #888;
+            font-weight: normal;
+        }
+        .files-in-date {
+            margin-left: 20px;
+            border-left: 2px solid #444;
+            padding-left: 15px;
+        }
+        .files-in-date .file-item {
+            margin-bottom: 8px;
+            background: #1a1a1a;
+        }
+        .files-in-date .file-item:last-child {
+            margin-bottom: 0;
+        }
+        .file-size {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .empty-message {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📋 Media History</h1>
+        <button onclick="window.close()" style="background: #f44336; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Close</button>
+    </div>
+    
+    <div class="stats" id="stats">
+        <div class="stat-item">
+            <div class="stat-value" id="totalFiles">0</div>
+            <div class="stat-label">Total Files</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="totalSize">0 MB</div>
+            <div class="stat-label">Total Size</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="removedFiles">0</div>
+            <div class="stat-label">Removed Files</div>
+        </div>
+    </div>
+    
+    <div class="tabs">
+        <div class="tab active" data-type="videos">🎬 Videos</div>
+        <div class="tab" data-type="audio">🎵 Audio</div>
+        <div class="tab" data-type="images">🖼️ Images</div>
+        <div class="tab" data-type="removed">🗑️ Removed</div>
+    </div>
+    
+    <div class="content" id="content">
+        <div class="empty-message">Loading...</div>
+    </div>
+
+    <script src="history.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+media-watcher-electron/
+├── main.js
+├── package.json
+├── preload.js
+├── renderer.js
+├── index.html
+└── watched-folder/

@@ -1,0 +1,19 @@
+#!/bin/bash
+# Media Watcher Simple Launcher
+# Just double-click this file
+
+cd "$(dirname "$0")"
+
+# Use AppleScript to open Terminal and run the app
+osascript << 'EOF'
+tell application "Terminal"
+    activate
+    set newTab to do script "cd '/Users/rgriola/Desktop/WatchFolder'"
+    delay 1
+    do script "echo '🎬 Media Watcher Launcher'" in newTab
+    do script "echo '========================='" in newTab
+    do script "if [ ! -d 'node_modules' ]; then echo '📦 Installing dependencies...' && npm install; fi" in newTab
+    do script "echo '🚀 Starting Media Watcher...'" in newTab
+    do script "npm start" in newTab
+end tell
+EOF
